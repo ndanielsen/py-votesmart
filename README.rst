@@ -65,8 +65,9 @@ the provided election or candidate id.
 Example of getting Nancy Pelosi's office:
 
     >>> addr = votesmart.address.getOffice(26732)[0]
-    >>> print addr.street, addr.city, addr.state
-    235 Cannon House Office Building Washington DC
+    >>> print(addr.street, addr.city, addr.state)
+    90 7th Street
+    Suite 2-800 San Francisco CA
 
 ``getCampaignWebAddress(candidateId)`` and ``getOfficeWebAddress(candidateId)``
 return a list of ``WebAddress`` objects based on the provided election or
@@ -74,10 +75,18 @@ candidate id.
 
 Example of getting Nancy Pelosi's web addresses:
     >>> for x in votesmart.address.getOfficeWebAddress(26732):
-    ...     print x
-    https://pelosi.house.gov/contact/email-me.shtml
+    ...     print(x)
+    http://demleader.tumblr.com/
+    http://pelosi.house.gov/contact-me/email-me
+    https://instagram.com/nancypelosi/
+    https://plus.google.com/+NancyPelosi
+    https://www.facebook.com/NancyPelosi
+    https://www.flickr.com/photos/speakerpelosi/
+    https://www.pinterest.com/nancypelosi/
+    http://twitter.com/NancyPelosi
+    http://www.democraticleader.gov/
     http://www.house.gov/pelosi/
-    AmericanVoices@mail.house.gov
+    http://www.youtube.com/user/nancypelosi
 
 --------------------
 candidatebio methods
@@ -91,13 +100,13 @@ a series of AddlBio objects.
 Example of getting Nancy Pelosi's bio:
 
     >>> bio = votesmart.candidatebio.getBio(26732)
-    >>> print 'Born', bio.birthDate, 'in', bio.birthPlace
+    >>> print('Born', bio.birthDate, 'in', bio.birthPlace)
     Born 03/26/1940 in Baltimore, MD
     
     >>> for fact in votesmart.candidatebio.getAddlBio(26732):
-    ...     print fact
+    ...     print(fact)
     Father's Occupation: Congressman for Baltimore, Mayor of Baltimore
-    Number of Grandchildren: 5
+    Number of Grandchildren: 9
 
 ------------------
 candidates methods
@@ -116,24 +125,28 @@ All six methods return a list containing one or more Candidate objects.
 
 Example of fetching all candidates for the NJ Gubernatorial race:
 
-    >>> for candidate in votesmart.candidates.getByOfficeState(3, 'NJ'):
-    ...    print candidate
-    Christopher Christie
-    Christopher Christie
-    Jon Corzine
-    Jon Corzine
-    Jason Cullen
-    Christopher Daggett
-    Kenneth Kaplan
-    Joshua Leinsdorf
-    Brian Levine
+    >>> for candidate in sorted(votesmart.candidates.getByOfficeState(3, 'NJ', electionYear=2009), key=lambda x: str(x)):
+    ...    print(candidate)
     Alvin Lindsay
+    Brian Levine
+    Carl Bergmanson
+    Christian Keller
+    Christopher Christie
+    Christopher Daggett
+    David Brown
     David Meiswinkle
-    Richard Merkt
-    Gregory Pason
-    Kostas Petris
     Gary Steele
     Gary Stein
+    Gregory Pason
+    Jason Cullen
+    Jeff Boss
+    Jon Corzine
+    Joshua Leinsdorf
+    Kenneth Kaplan
+    Kostas Petris
+    Richard Merkt
+    Roger Bacon
+    Steven Lonegan
 
 You will notice that several candidates appear twice, this is due to an
 unfortunate issue with the Vote Smart API where candidates with multiple
@@ -153,7 +166,7 @@ Official API documentation at http://api.votesmart.org/docs/Committee.html
 Example:
 
     >>> for c in votesmart.committee.getTypes():
-    ...     print c.committeeTypeId, c.name
+    ...     print(c.committeeTypeId, c.name)
     H House
     S Senate
     J Joint
@@ -166,7 +179,7 @@ will be returned.
 Example of getting all joint committees:
 
     >>> for c in votesmart.committee.getCommitteesByTypeState(typeId='J'):
-    ...     print c
+    ...     print(c)
     Joint Committee on Printing
     Joint Committee on Taxation
     Joint Committee on the Library
@@ -178,28 +191,21 @@ CommitteeDetail object.
 Example of getting details on the House Ways & Means committee:
 
     >>> committee = votesmart.committee.getCommittee(23)
-    >>> print committee
+    >>> print(committee)
     Ways and Means
 
 ``getCommitteeMembers(committeeId)`` gets a list of CommitteeMember objects
 representing members of the given committee.
 
-Example of getting all members of the Subcommittee on the Constitution,
-Civil Rights, and Civil Liberties:
+Example of getting all members of the House Ways & Means committee:
 
-    >>> for member in votesmart.committee.getCommitteeMembers(4015):
-    ...     print member
-    Representative Trent Franks
-    Representative Mike Pence
-    Representative Steven Chabot
-    Representative John Conyers
-    Representative James Randy Forbes
-    Representative James Jordan
-    Representative Steve King
-    Representative Jerrold Nadler
-    Representative Mike Quigley
-    Representative Robert Scott
-
+    >>> for member in sorted(votesmart.committee.getCommitteeMembers(23)[0:5], key=lambda x: str(x)):
+    ...     print(member)
+    Representative Diane Black
+    Representative Earl Blumenauer
+    Representative Kevin Brady
+    Representative Sander Levin
+    Representative Xavier Becerra
 
 ----------------
 district methods
@@ -213,7 +219,7 @@ District objects matching the specified criteria.
 Example of getting all House districts for North Carolina:
 
     >>> for district in votesmart.district.getByOfficeState(5, 'NC'):
-    ...     print district
+    ...     print(district)
     1
     2
     3
@@ -239,10 +245,10 @@ Official API documentation at
 Example of getting details on NC 2008 Gubernatorial election:
 
     >>> election = votesmart.election.getElection(684)
-    >>> print election.name
+    >>> print(election.name)
     North Carolina Gubernatorial 2008
     >>> for stage in election.stages:
-    ...     print stage.name, stage.electionDate
+    ...     print(stage.name, stage.electionDate)
     Primary 2008-05-06
     General 2008-11-04
 
@@ -254,7 +260,7 @@ elections.
 Example of getting details on all elections in North Carolina in 2008:
 
     >>> for election in votesmart.election.getElectionByYearState(2008, 'NC'):
-    ...     print election
+    ...     print(election)
     North Carolina Congressional 2008
     North Carolina Gubernatorial 2008
     North Carolina State Legislative 2008
@@ -280,13 +286,15 @@ objects matching the given criteria.
 Example of getting all Alaska leadership positions:
 
     >>> for pos in votesmart.leadership.getPositions('AK'):
-    ...     print pos.officeName, pos.name
+    ...     print(pos.officeName, pos.name)
     State House Speaker
     State Senate President
     State Senate Majority Leader
     State House Majority Leader
+    State House Majority Whip
     State Senate Minority Leader
     State House Minority Leader
+    State House Minority Whip
 
 -------------
 local methods
@@ -300,7 +308,7 @@ cities as Locality objects.
 Example of getting all cities in Alaska:
 
     >>> for city in votesmart.local.getCities('AK'):
-    ...     print city.name, city.localId
+    ...     print(city.name, city.localId)
     Anchorage 1
     Fairbanks 2
     Juneau 4322
@@ -310,8 +318,8 @@ Example of getting all cities in Alaska:
 Example of getting all officials from Anchorage, AK:
 
     >>> for official in votesmart.local.getOfficials(1)[0:1]:
-    ...     print official
-    Mayor Mark Begich
+    ...     print(official)
+    Mayor Ethan Berkowitz
 
 ---------------
 measure methods
@@ -325,7 +333,7 @@ the provided year and state.
 Example of getting all 2008 Maryland Ballot Measures:
 
     >>> for measure in votesmart.measure.getMeasuresByYearState(2008, 'MD'):
-    ...     print measure.measureId, measure.title
+    ...     print(measure.measureId, measure.title)
     1260 Video Lottery
     1261 Early Voting
 
@@ -335,7 +343,7 @@ about a particular measure.
 Example of getting more details on Maryland 2008 Early Voting measure:
 
     >>> measure = votesmart.measure.getMeasure(1260)
-    >>> print measure.source       # just print the url -- summary is long
+    >>> print(measure.source)       # just print the url -- summary is long
     http://www.elections.state.md.us/elections/2008/questions/index.html
 
 ------------
@@ -349,9 +357,8 @@ it returns a python dict representing the NPAT in question.
 
 Example of checking John McCain's NPAT:
 
-    >>> print votesmart.npat.getNpat(53270)['surveyMessage']
-    refused  to tell citizens where he/she stands on any of the issues addressed in the 2010 Political Courage Test, despite repeated requests from Vote Smart, national media, and prominent political leaders.
-
+    >>> print(votesmart.npat.getNpat(53270)['surveyMessage'])
+    John Sidney McCain III is currently being tested through the 2016 Political Courage Test.<br><br>Deadline for returning the National Political Awareness Test is 10/27/2016
 
 --e-----------
 office methods
@@ -365,7 +372,7 @@ that the PVS API tracks.
 Example call:
 
     >>> for type in votesmart.office.getTypes():
-    ...     print type
+    ...     print(type)
     P: Presidential and Cabinet
     C: Congressional
     J: Supreme Court
@@ -383,7 +390,7 @@ that the PVS API tracks.
 Example call:
 
     >>> for branch in votesmart.office.getBranches():
-    ...     print branch
+    ...     print(branch)
     E: Executive
     L: Legislative
     J: Judicial
@@ -394,7 +401,7 @@ levels that the PVS API tracks.
 Example call:
 
     >>> for level in votesmart.office.getLevels():
-    ...     print level
+    ...     print(level)
     F: Federal
     S: State
     L: Local
@@ -407,13 +414,13 @@ based on the provided parameters.
 Example of getting all Executive titles for the Local level:
 
     >>> for office in votesmart.office.getOfficesByBranchLevel('E', 'L'):
-    ...     print office
-    Freeholder
+    ...     print(office)
     Mayor
     Public Advocate
     Council
     Comptroller
     Village Manager
+    Mayor Pro Tempore
 
 -----------------
 officials methods
@@ -434,7 +441,7 @@ All officials methods return a list containing one or more Candidate objects.
 Example of fetching all senators from California.
 
     >>> for official in votesmart.officials.getByOfficeState(6, 'CA'):
-    ...    print official
+    ...    print(official)
     Senator Barbara Boxer
     Senator Dianne Feinstein
 
@@ -449,13 +456,13 @@ state (national if no state provided).
 
 Example of getting a few of the issue categories for New York:
 
-    >>> for category in votesmart.rating.getCategories('NY')[0:5]:
-    ...     print category
-    2: Abortion Issues
-    5: Animal Rights and Wildlife Issues
+    >>> for category in sorted(votesmart.rating.getCategories('NY')[0:5], key=lambda x: str(x)):
+    ...     print(category)
     11: Business and Consumers
     13: Civil Liberties and Civil Rights
-    17: Conservative
+    2: Abortion
+    5: Animals and Wildlife
+    75: Abortion and Reproductive
 
 ``getSigList(categoryId, stateId=None)`` gets a list of Sig objects representing
 all special interest groups associated with a particular category.  Optionally
@@ -465,12 +472,12 @@ particular state.
 Example of getting a few groups concerned with Environmental Issues:
 
     >>> for sig in votesmart.rating.getSigList(30)[0:5]:
-    ...     print sig
+    ...     print(sig)
+    22: American Forest and Paper Association
     934: American Lands Alliance
+    1792: American Society of Landscape Architects
     1081: American Wilderness Coalition
-    1702: American Wind Energy Association
-    1107: California Park & Recreation Society
-    292: Citizens for Health - Food, Water & Ecological Health Rating
+    1789: Associated Equipment Distributors
 
 
 ``getSig(sigId)`` gets all details available for a special interest group.
@@ -478,8 +485,8 @@ Example of getting a few groups concerned with Environmental Issues:
 Example getting all details for Sierra Club:
 
     >>> sig = votesmart.rating.getSig(657)
-    >>> print sig.address, sig.city, sig.state
-    408 C Street, Northeast Washington DC
+    >>> print(sig.address, sig.city, sig.state)
+    50 F Street, Northwest, Eighth Floor Washington DC
     
 ``getCandidateRating(candidateId, sigId)`` gets a Rating object representing
 a candidate's rating by a particular special interest group.
@@ -487,7 +494,10 @@ a candidate's rating by a particular special interest group.
 Example checking how Sierra Club rated Nancy Pelosi:
 
     >>> for rating in votesmart.rating.getCandidateRating(26732, 657):
-    ...     print rating
+    ...     print(rating)
+    Representative Nancy Pelosi supported the interests of the Sierra Club 100 percent in 2012.
+    <BLANKLINE>
+    Representative Nancy Pelosi supported the interests of the Sierra Club 100 percent in 2003.
 
 -------------
 state methods
@@ -500,7 +510,7 @@ Official API documentation at http://api.votesmart.org/docs/State.html
 Example of printing a few of the states returned from getStateIds:
 
     >>> for state in votesmart.state.getStateIDs()[0:5]:
-    ...     print state
+    ...     print(state)
     NA National
     AS American Samoa
     FL Florida
@@ -513,8 +523,8 @@ a given state.
 Example of getting several details about the state of Virginia:
 
     >>> va = votesmart.state.getState('VA')
-    >>> print va.population, va.motto
-    7,882,590 (2009) Sic Semper Tyrannis [Thus Always to Tyrants]
+    >>> print(va.population, va.motto)
+    8,185,867 (2012 est.) Sic Semper Tyrannis [Thus Always to Tyrants]
 
 -------------
 votes methods
@@ -527,13 +537,13 @@ given year and optionally a state (national if no state provided).
 
 Example of getting a few of the national bill categories for 2008:
 
-    >>> for category in votesmart.votes.getCategories(2008)[0:5]:
-    ...     print category
-    2: Abortion Issues
-    4: Agriculture Issues
-    5: Animal Rights and Wildlife Issues
-    10: Budget, Spending and Taxes
+    >>> for category in sorted(votesmart.votes.getCategories(2008)[0:5], key=lambda x: str(x)):
+    ...     print(category)
     11: Business and Consumers
+    2: Abortion
+    4: Agriculture and Food
+    75: Abortion and Reproductive
+    7: Arts, Entertainment, and History
 
 ``getBill(billId)`` returns a BillDetail object providing details on a particular
 bill.
@@ -541,15 +551,15 @@ bill.
 Example of getting details on HR 7321 Auto Industry Financing bill:
 
     >>> bill = votesmart.votes.getBill(8528)
-    >>> print bill.officialTitle
+    >>> print(bill.officialTitle)
     HR 7321:  To authorize financial assistance to eligible automobile manufacturers, and for other purposes.
     >>> for sponsor in bill.sponsors:
-    ...     print sponsor
+    ...     print(sponsor)
     Barney  Frank
     >>> for action in bill.actions:
-    ...     print action
-    2008-12-10 - Introduced
+    ...     print(action)
     2008-12-10 - Passage
+    2008-12-10 - Introduced
     
 
 ``getBillAction(actionId)`` returns a BillAction object providing details on
@@ -557,7 +567,7 @@ a particular action taken on a bill.
 
 Example of getting details on an action for HR 5576:
 
-    >>> print votesmart.votes.getBillAction(8272)
+    >>> print(votesmart.votes.getBillAction(8272))
     HR 5576: Making appropriations for the Departments of Transportation, Treasury, and Housing and Urban Development, the Judiciary, District of Columbia, and independent agencies for the fiscal year ending September 30, 2007, and for other purposes.
 
 ``getBillActionVotes(actionId)`` and
@@ -566,7 +576,7 @@ objects for a given action (and official).
 
 Example of getting Nancy Pelosi's vote on passage of HR 7321:
 
-    >>> print votesmart.votes.getBillActionVoteByOfficial(23069, 26732)
+    >>> print(votesmart.votes.getBillActionVoteByOfficial(23069, 26732))
     Pelosi, Nancy: Yea
 
 
@@ -584,12 +594,12 @@ There are 8 methods that return Bill objects based on various parameters:
 Example of getting a few recently tracked bills for 2008:
 
     >>> for bill in votesmart.votes.getBillsByYearState(2008)[-5:]:
-    ...     print bill
-    HR 3997 Financial Asset Purchase Authority
-    HR 7321 Automotive Industry Financing
-    H Res 982 Contempt Charges
-    HR 5501 Funding to Combat AIDS, Malaria, and Tuberculosis
-    HR 415 Adding Parts of the Taunton River to the National Wild and Scenic Rivers System
+    ...     print(bill)
+    S 3001 Defense Authorizations Bill
+    S 1200 Indian Health Care Improvement Act Amendments of 2008
+    S Amdt 5064 Striking Telecom Immunity from the Foreign Intelligence Surveillance Bill
+    HR 6867 Emergency Extended Unemployment Compensation
+    HR 6052 Public Transportation and Alternative Fuel Grants
 
 
 ``getVetoes(candidateId)`` returns all vetoes for a particular executive.
@@ -597,12 +607,16 @@ Example of getting a few recently tracked bills for 2008:
 Example of getting all of George W. Bush's vetoes:
 
     >>> for veto in votesmart.votes.getVetoes(22369):
-    ...     print veto
+    ...     print(veto)
     HR 6331 Medicare Bill
     HR 6124 Second Farm, Nutrition, and Bioenergy Act of 2007 (Farm Bill)
     HR 2419 Farm, Nutrition, and Bioenergy Act of 2007 (Farm Bill)
-    HR 1585 
+    HR 2082 Intelligence Authorization Act for Fiscal Year 2008
+    HR 1585 National Defense Authorization Act for Fiscal Year 2008
     HR 3963 Children's Health Insurance Program Reauthorization Act of 2007 (CHIP)
+    HR 3043 Departments of Labor, Health and Human Services, and Education, and Related Agencies Appropriations Act, 2008
+    HR 1495 Water Resources Development Act of 2007
     HR 976 State Children's Health Insurance Program (CHIP) Reauthorization
     S 5 Stem Cell Research Act of 2007
     HR 1591 Emergency Supplemental Appropriations Bill of 2007 with Iraq Withdrawal Timeline
+    HR 810 Stem Cell Research Enhancement Act of 2005

@@ -19,6 +19,8 @@ setup(name="python-votesmart",
                    "Operating System :: OS Independent",
                    "Programming Language :: Python",
                    "Topic :: Software Development :: Libraries :: Python Modules",
+                   "Programming Language :: Python :: 2.7",
+                   "Programming Language :: Python :: 3.5"
                    ],
        install_requires=["simplejson >= 1.8"]
       )
