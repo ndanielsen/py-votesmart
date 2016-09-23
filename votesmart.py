@@ -471,7 +471,7 @@ class votesmart(object):
 
         @staticmethod
         def getOfficesByTypeLevel(typeId, levelId):
-            params = {'typeId':typeId, 'levelId':levelId}
+            params = {'officeTypeId':typeId, 'officeLevelId':levelId}
             result = votesmart._apicall('Office.getOfficesByTypeLevel', params)
             return _result_to_obj(Office, result['offices']['office'])
 
