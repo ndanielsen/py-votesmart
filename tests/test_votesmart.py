@@ -1,4 +1,5 @@
 from __future__ import print_function
 from votesmart import *
 
-assert 1 + 1 == 2
+def test_sanity():
+    assert 1 + 1 == 2

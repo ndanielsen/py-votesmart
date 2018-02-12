@@ -13,7 +13,7 @@ Originally written by James Turk <jturk@sunlightfoundation.com>.
 
 All code is under a BSD-style license, see LICENSE for details.
 
-Source: http://github.com/ndanielsen/py-votesmart/
+Original Source: https://github.com/votesmart/python-votesmart
 
 
 Requirements
