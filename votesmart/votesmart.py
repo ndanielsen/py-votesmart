@@ -6,7 +6,7 @@
 """
 
 __author__ = "James Turk <jturk@sunlightfoundation.com>"
-__version__ = "0.3.4"
+__version__ = "0.3.5"
 __copyright__ = "Copyright (c) 2016 Project Vote Smart"
 __license__ = "BSD"
 
@@ -176,7 +176,7 @@ class BillDetail(VotesmartApiObject):
         sponsors = d.pop('sponsors')
         actions = d.pop('actions')
         amendments = d.pop('amendments')  # ammendments -- sic
-        if not sponsors: sponsors = { 'sponsor': [] } 
+        if not sponsors: sponsors = { 'sponsor': [] }
         self.sponsors = _result_to_obj(BillSponsor, sponsors['sponsor'])
         self.actions = _result_to_obj(BillAction, actions['action'])
         if amendments:

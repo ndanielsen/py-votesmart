@@ -1,0 +1,9 @@
+# Testing Requirements
+pytest>=3.2.3
+pytest_cov>=2.5.1
+coverage>=4.1
+
+# Python 2 Testing Requirements
+mock>=2.0.0
+
+# Optional Testing Dependencies

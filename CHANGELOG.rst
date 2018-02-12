@@ -1,5 +1,14 @@
-python-votesmart changelog
+py-votesmart changelog
 ==========================
+
+0.3.5
+-----
+    * Fork and restructure package from Nathan Danielsen (@ndanielsen)
+
+0.3.4
+-----
+    * Python3 support from Al Johri (@AlJohri)
+    * Fix getOfficesByTypeLevel from Al Johri (@AlJohri)
 
 0.3.3
 -----
@@ -29,4 +38,3 @@ python-votesmart changelog
 0.2.0
 -----
     * first public release (superceded unpythonic internal library)
-

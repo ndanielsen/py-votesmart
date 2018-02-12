@@ -1,28 +1,25 @@
 ================
-python-votesmart
+py-votesmart
 ================
 
-Python library for interacting with the Project Vote Smart API.
+Python 3 supported library for interacting with the Project Vote Smart API.
 
 The Project Vote Smart API provides detailed information on politicians,
 including bios, votes, and NPAT responses.
 (http://votesmart.org/services_api.php)
 
-python-votesmart is a project of Sunlight Labs (c) 2008.
-Written by James Turk <jturk@sunlightfoundation.com>.
+py-votesmart is a fork of the python-votesmart which is a project of Sunlight Labs (c) 2008.
+Originally written by James Turk <jturk@sunlightfoundation.com>.
 
 All code is under a BSD-style license, see LICENSE for details.
 
-Homepage: http://pypi.python.org/pypi/python-votesmart/
-
-Source: http://github.com/sunlightlabs/python-votesmart/
+Source: http://github.com/ndanielsen/py-votesmart/
 
 
 Requirements
 ============
 
-python >= 2.4
-
+python >= 2.7
 simplejson >= 1.8 (not required with python 2.6, will use built in json module)
 
 
@@ -45,9 +42,9 @@ API key to be defined.
 register for one.)
 
 Import ``votesmart`` from ``votesmart``:
-    
+
     >>> from votesmart import votesmart
-    
+
 And set your API key:
 
     >>> votesmart.apikey = '<YOUR KEY>'
@@ -102,7 +99,7 @@ Example of getting Nancy Pelosi's bio:
     >>> bio = votesmart.candidatebio.getBio(26732)
     >>> print('Born', bio.birthDate, 'in', bio.birthPlace)
     Born 03/26/1940 in Baltimore, MD
-    
+
     >>> for fact in votesmart.candidatebio.getAddlBio(26732):
     ...     print(fact)
     Father's Occupation: Congressman for Baltimore, Mayor of Baltimore
@@ -238,7 +235,7 @@ Example of getting all House districts for North Carolina:
 election methods
 ----------------
 
-Official API documentation at 
+Official API documentation at
 
 ``getElection(electionId)`` fetches a single Election object by electionId.
 
@@ -312,7 +309,7 @@ Example of getting all cities in Alaska:
     Anchorage 1
     Fairbanks 2
     Juneau 4322
-    
+
 ``getOfficials(localId)`` gets all Officials known for a given locality.
 
 Example of getting all officials from Anchorage, AK:
@@ -407,7 +404,7 @@ Example call:
     L: Local
 
 ``getOfficesByType(typeId)``, ``getOfficesByLevel(levelId)``,
-``getOfficesByTypeLevel(typeId, levelId)``, and 
+``getOfficesByTypeLevel(typeId, levelId)``, and
 ``getOfficesByBranchLevel(branchId, levelId)`` return a list of Office objects
 based on the provided parameters.
 
@@ -487,7 +484,7 @@ Example getting all details for Sierra Club:
     >>> sig = votesmart.rating.getSig(657)
     >>> print(sig.address, sig.city, sig.state)
     50 F Street, Northwest, Eighth Floor Washington DC
-    
+
 ``getCandidateRating(candidateId, sigId)`` gets a Rating object representing
 a candidate's rating by a particular special interest group.
 
@@ -560,7 +557,7 @@ Example of getting details on HR 7321 Auto Industry Financing bill:
     ...     print(action)
     2008-12-10 - Passage
     2008-12-10 - Introduced
-    
+
 
 ``getBillAction(actionId)`` returns a BillAction object providing details on
 a particular action taken on a bill.
