@@ -5,7 +5,6 @@ python:
   - '3.6'
 
 before_install:
-  - sudo apt-get build-dep
   - pip install coverage mock
   - pip install coveralls requests
   - pip install -r tests/requirements.txt
