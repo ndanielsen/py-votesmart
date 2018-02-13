@@ -6,16 +6,13 @@
 """
 
 from .exceptions import VotesmartApiError
+import sys
 
 try:
-    from urllib2 import urlopen, HTTPError
+    import requests
 except ImportError:
-    from urllib.request import urlopen, HTTPError
-
-try:
-    from urllib import urlencode
-except ImportError:
-    from urllib.parse import urlencode
+    print('Requests package not found, please run pip3 install requests in your environment')
+    sys.exit(1)
 
 try:
     import json
@@ -211,16 +208,20 @@ class votesmart(object):
             raise VotesmartApiError('Missing Project Vote Smart apikey')
 
         params = dict([(k,v) for (k,v) in params.items() if v])
-        url = 'http://api.votesmart.org/%s?o=JSON&key=%s&%s' % (func,
-            votesmart.apikey, urlencode(params))
+
+        url = 'http://api.votesmart.org/%s?o=JSON&key=%s' % (func, votesmart.apikey)
+        response = requests.post(url=url, data=json.dumps(params))
         try:
-            response = urlopen(url).read()
-            obj = json.loads(response.decode('utf-8'))
+            obj = json.loads(response.text)
             if 'error' in obj:
                 raise VotesmartApiError(obj['error']['errorMessage'])
             else:
                 return obj
-        except HTTPError as e:
+        except requests.HTTPError as e:
+            raise VotesmartApiError(e)
+        except requests.Timeout as e:
+            raise VotesmartApiError(e)
+        except requests.ConnectionError as e:
             raise VotesmartApiError(e)
         except ValueError as e:
             raise VotesmartApiError('Invalid Response')
