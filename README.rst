@@ -8,29 +8,21 @@ The Project Vote Smart API provides detailed information on politicians,
 including bios, votes, and NPAT responses.
 (http://votesmart.org/services_api.php)
 
+All code is under a BSD-style license, see LICENSE for details.
+
+================
+Backstory
+================
 py-votesmart is a fork of the python-votesmart which is a project of Sunlight Labs (c) 2008.
 Originally written by James Turk <jturk@sunlightfoundation.com>.
 
-All code is under a BSD-style license, see LICENSE for details.
-
 Original Source: https://github.com/votesmart/python-votesmart
-
-
-Requirements
-============
-
-python >= 2.7
-simplejson >= 1.8 (not required with python 2.6, will use built in json module)
-
 
 Installation
 ============
-To install run
+py-votesmart is compatible with Python 2.7 or later, but it is preferred to use Python 3.5 or later to take full advantage of all functionality. The simplest way to install Yellowbrick is from PyPI with pip, Python’s preferred package installer.
 
-    ``python setup.py install``
-
-which will install the library into python's site-packages directory.
-
+pip install py-votesmart
 
 Usage
 =====

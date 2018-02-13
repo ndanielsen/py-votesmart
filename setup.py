@@ -7,6 +7,9 @@ from setuptools import find_packages
 
 PROJECT = os.path.abspath(os.path.dirname(__file__))
 REQUIRE_PATH = "requirements.txt"
+EXCLUDES     = (
+    "tests", "bin", "docs", "fixtures", "register", "notebooks", "examples",
+)
 
 long_description = open('README.rst').read()
 
@@ -30,13 +33,14 @@ def get_requires(path=REQUIRE_PATH):
 
 setup(name="py-votesmart",
       version="0.3.5",
-      py_modules=["/votesmart/"],
       description="Libraries for interacting with the Project Vote Smart API",
       author="Nathan Danielsen <nathan.danielsen@gmail.com>",
       author_email = "nathan.danielsen@gmail.com",
       license="BSD",
       url="http://github.com/ndanielsen/py-votesmart/",
-      long_description=long_description,
+      long_description="py-votesmart is a fork of the original python-votesmart with python3 support",
+      packages=find_packages(where=PROJECT, exclude=EXCLUDES),
+
       platforms=["any"],
       classifiers=["Development Status :: 3 - Alpha",
                    "Intended Audience :: Developers",

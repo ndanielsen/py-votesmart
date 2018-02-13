@@ -1,1 +1,2 @@
+wheel
 simplejson >= 1.8

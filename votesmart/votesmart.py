@@ -5,10 +5,7 @@
     assignments, and much more.
 """
 
-__author__ = "James Turk <jturk@sunlightfoundation.com>"
-__version__ = "0.3.5"
-__copyright__ = "Copyright (c) 2016 Project Vote Smart"
-__license__ = "BSD"
+from .exceptions import VotesmartApiError
 
 try:
     from urllib2 import urlopen, HTTPError
@@ -25,8 +22,6 @@ try:
 except ImportError:
     import simplejson as json
 
-class VotesmartApiError(Exception):
-    """ Exception for Sunlight API errors """
 
 class VotesmartApiObject(object):
     def __init__(self, d):
