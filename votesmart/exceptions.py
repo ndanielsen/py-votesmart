@@ -1,3 +1,2 @@
-
 class VotesmartApiError(Exception):
-    """ Exception for Sunlight API errors """
+    """Exception for Votesmart API errors """
