@@ -1,4 +1,5 @@
 simplejson >= 1.8
+requests >= 2.13.0
 
 # Build Requirements (uncomment for deployment)
 #wheel>=0.29.0
