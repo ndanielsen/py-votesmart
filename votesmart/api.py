@@ -3,7 +3,7 @@ import requests
 from .utils import _parse_api_response
 from .exceptions import VotesmartApiError
 
-class Votesmart:
+class VoteSmart:
     def __init__(self, api_key=None):
         if api_key is None:
             raise ValueError('A Votesmart api_key is required')
