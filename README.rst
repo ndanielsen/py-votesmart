@@ -20,9 +20,9 @@ Original Source: https://github.com/votesmart/python-votesmart
 
 Installation
 ============
-py-votesmart is compatible with Python 2.7 or later, but it is preferred to use Python 3.5 or later to take full advantage of all functionality. The simplest way to install Yellowbrick is from PyPI with pip, Python’s preferred package installer.
+py-votesmart is compatible with Python 2.7 or later, but it is preferred to use Python 3.5 or later to take full advantage of all functionality. The simplest way to install py-votesmart is from PyPI with pip, Python’s preferred package installer.
 
-pip install py-votesmart
+    >>> pip install py-votesmart
 
 Usage
 =====
