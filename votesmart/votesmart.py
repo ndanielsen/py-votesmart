@@ -6,6 +6,8 @@
 """
 
 from .exceptions import VotesmartApiError
+from .containers import VotesmartApiObject
+from .api import VoteSmartAPI
 
 try:
     from urllib2 import urlopen, HTTPError
@@ -22,19 +24,15 @@ try:
 except ImportError:
     import simplejson as json
 
+from .utils import _result_to_obj
 
-class VotesmartApiObject(object):
+
+class AddressData(object):
     def __init__(self, d):
         self.__dict__ = d
-
-    def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.__dict__)
-
-class Address(object):
-    def __init__(self, d):
-        self.__dict__.update(d['address'])
-        self.__dict__.update(d['phone'])
-        self.__dict__.update(d['notes'])
+        # self.__dict__.update(d['address'])
+        # self.__dict__.update(d['phone'])
+        # self.__dict__.update(d['notes'])
 
     def __repr__(self):
         return '%s(%r)' % (self.__class__.__name__, self.__dict__)
@@ -194,12 +192,7 @@ class Veto(VotesmartApiObject):
     def __str__(self):
         return ' '.join((self.billNumber, self.billTitle))
 
-def _result_to_obj(cls, result):
-    if isinstance(result, dict):
-        return [cls(result)]
-    else:
-        # the if o predicate is important, sometimes they return empty strings
-        return [cls(o) for o in result if o]
+
 
 class votesmart(object):
 
@@ -225,12 +218,12 @@ class votesmart(object):
         except ValueError as e:
             raise VotesmartApiError('Invalid Response')
 
-    class address(object):
+    class Address(object):
         @staticmethod
         def getCampaign(candidateId):
             params = {'candidateId': candidateId}
             result = votesmart._apicall('Address.getCampaign', params)
-            return _result_to_obj(Address, result['address']['office'])
+            return _result_to_obj(AddressData, result['address']['office'])
 
         @staticmethod
         def getCampaignWebAddress(candidateId):
@@ -242,13 +235,13 @@ class votesmart(object):
         def getCampaignByElection(electionId):
             params = {'electionId': electionId}
             result = votesmart._apicall('Address.getCampaignByElection', params)
-            return _result_to_obj(Address, result['address']['office'])
+            return _result_to_obj(AddressData, result['address']['office'])
 
         @staticmethod
         def getOffice(candidateId):
             params = {'candidateId': candidateId}
             result = votesmart._apicall('Address.getOffice', params)
-            return _result_to_obj(Address, result['address']['office'])
+            return _result_to_obj(AddressData, result['address']['office'])
 
         @staticmethod
         def getOfficeWebAddress(candidateId):
@@ -262,7 +255,7 @@ class votesmart(object):
         #    result = votesmart._apicall('Address.getOfficeByOfficeState', params)
         #    return _result_to_obj(Address, result['address']['office'])
 
-    class candidatebio(object):
+    class CandidateBio(object):
         @staticmethod
         def getBio(candidateId):
             params = {'candidateId': candidateId}
@@ -276,7 +269,7 @@ class votesmart(object):
             return _result_to_obj(AddlBio,
                                   result['addlBio']['additional']['item'])
 
-    class candidates(object):
+    class Candidates(object):
         @staticmethod
         def getByOfficeState(officeId, stateId=None, electionYear=None):
             params = {'officeId': officeId, 'stateId':stateId, 'electionYear': electionYear}
@@ -319,7 +312,7 @@ class votesmart(object):
             result = votesmart._apicall('Candidates.getByZip', params)
             return _result_to_obj(Candidate, result['candidateList']['candidate'])
 
-    class committee(object):
+    class Committee(object):
         @staticmethod
         def getTypes():
             result = votesmart._apicall('Committee.getTypes', {})
@@ -343,7 +336,7 @@ class votesmart(object):
             result = votesmart._apicall('Committee.getCommitteeMembers', params)
             return _result_to_obj(CommitteeMember, result['committeeMembers']['member'])
 
-    class district(object):
+    class District(object):
         @staticmethod
         def getByOfficeState(officeId, stateId, districtName=None):
             params = {'officeId':officeId, 'stateId': stateId, 'districtName': districtName}
@@ -356,7 +349,7 @@ class votesmart(object):
             result = votesmart._apicall('District.getByZip', params)
             return _result_to_obj(District, result['districtList']['district'])
 
-    class election(object):
+    class Election(object):
         @staticmethod
         def getElection(electionId):
             params = {'electionId':electionId}
@@ -384,20 +377,20 @@ class votesmart(object):
             return _result_to_obj(Candidate, result['stageCandidates']['candidate'])
 
 
-    class leadership(object):
+    class Leadership(object):
         @staticmethod
         def getPositions(stateId=None, officeId=None):
             params = {'stateId':stateId, 'officeId':officeId}
             result = votesmart._apicall('Leadership.getPositions', params)
             return _result_to_obj(LeadershipPosition, result['leadership']['position'])
 
-        #@staticmethod
-        #def getCandidates(leadershipId, stateId=None):
-        #    params = {'leadershipId':leadershipId, 'stateId':stateId}
-        #    result = votesmart._apicall('Leadership.getCandidates', params)
-        #    return result['leaders']['leader']
+        @staticmethod
+        def getOfficials(leadershipId, stateId=None):
+           params = {'leadershipId':leadershipId, 'stateId':stateId}
+           result = votesmart._apicall('Leadership.getOfficials', params)
+           return result['leaders']['leader']
 
-    class local(object):
+    class Local(object):
         @staticmethod
         def getCounties(stateId):
             params = {'stateId': stateId}
@@ -416,7 +409,7 @@ class votesmart(object):
             result = votesmart._apicall('Local.getOfficials', params)
             return _result_to_obj(Official, result['candidateList']['candidate'])
 
-    class measure(object):
+    class Measure(object):
         @staticmethod
         def getMeasuresByYearState(year, stateId):
             params = {'year':year, 'stateId':stateId}
@@ -429,14 +422,14 @@ class votesmart(object):
             result = votesmart._apicall('Measure.getMeasure', params)
             return MeasureDetail(result['measure'])
 
-    class npat(object):
+    class Npat(object):
         @staticmethod
         def getNpat(candidateId):
             params = {'candidateId':candidateId}
             result = votesmart._apicall('Npat.getNpat', params)
             return result['npat']
 
-    class office(object):
+    class Office(object):
         @staticmethod
         def getTypes():
             result = votesmart._apicall('Office.getTypes', {})
@@ -476,7 +469,7 @@ class votesmart(object):
             result = votesmart._apicall('Office.getOfficesByBranchLevel', params)
             return _result_to_obj(Office, result['offices']['office'])
 
-    class officials(object):
+    class Officials(object):
         @staticmethod
         def getStatewide(stateId=None):
             params = {'stateId': stateId}
@@ -519,7 +512,7 @@ class votesmart(object):
             result = votesmart._apicall('Officials.getByZip', params)
             return _result_to_obj(Official, result['candidateList']['candidate'])
 
-    class rating(object):
+    class Rating(object):
         @staticmethod
         def getCategories(stateId=None):
             params = {'stateId':stateId}
@@ -544,7 +537,7 @@ class votesmart(object):
             result = votesmart._apicall('Rating.getCandidateRating', params)
             return _result_to_obj(Rating, result['candidateRating']['rating'])
 
-    class state(object):
+    class State(object):
         @staticmethod
         def getStateIDs():
             result = votesmart._apicall('State.getStateIDs', {})
@@ -556,7 +549,7 @@ class votesmart(object):
             result = votesmart._apicall('State.getState', params)
             return StateDetail(result['state']['details'])
 
-    class votes(object):
+    class Votes(object):
         @staticmethod
         def getCategories(year, stateId=None):
             params = {'year':year, 'stateId':stateId}

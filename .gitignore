@@ -127,3 +127,4 @@ fabric.properties
 # pyenv
 .python-version
 .pytest_cache
+.env
