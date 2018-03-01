@@ -18,7 +18,7 @@ def test_api_set_payload():
 
     assert params == {'key': vsmart.api_key, "o":"JSON", "test": "okay"}
 
-def test_api__api_call(mocker):
+def test_api_api_call(mocker):
     # mock the .json() function on requests
     json_mock = mock.Mock()
     json_mock.json.return_value = {'tests' : 'ok'}
@@ -29,6 +29,6 @@ def test_api__api_call(mocker):
 
     vsmart = VoteSmartAPI(api_key="fake_key")
 
-    response = vsmart._api_call('testFunction', {"param": 'one'})
+    response = vsmart.api_call('testFunction', {"param": 'one'})
 
     assert response == {'tests' : 'ok'}
