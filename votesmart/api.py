@@ -3,7 +3,7 @@ import os
 import requests
 import six
 
-from .utils import _parse_api_response
+from .methods.utils import parse_api_response
 
 from .exceptions import VotesmartApiError
 from . import methods
@@ -18,7 +18,7 @@ class VoteSmartAPI:
         request_str = "http://api.votesmart.org/{function}".format(function=function)
         payload = self._set_payload(params)
         response = requests.get(request_str, params=payload)
-        return _parse_api_response(response.json())
+        return parse_api_response(response.json())
 
     def _set_payload(self, params):
         params = params.copy()
@@ -28,3 +28,11 @@ class VoteSmartAPI:
     @property
     def Candidates(self):
         return methods.Candidates(self)
+
+    @property
+    def State(self):
+        return methods.State(self)
+
+    @property
+    def Election(self):
+        return methods.Election(self)

@@ -1,9 +1,6 @@
 from .base import APIMethodBase
-from .containers import VotesmartApiObject
+from .containers import Candidate
 
-class Candidate(VotesmartApiObject):
-    def __str__(self):
-        return ' '.join((self.firstName, self.lastName))
 
 class Candidates(APIMethodBase):
 
