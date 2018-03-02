@@ -8,7 +8,7 @@ from .leadership import Leadership
 from .local import Local
 from .measure import Measure
 from .npat import Npat
-from .offices import Office
+from .office import Office
 from .officials import Officials
 from .ratings import Rating
 from .states import State

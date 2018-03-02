@@ -20,6 +20,41 @@ class CandidatesTestCase(LiveTestAPITestCase):
         results = self.vsmart.Candidates.getByOfficeState(3, 'NJ', electionYear=2009)
         self.assertEqual(len(results), 20)
 
+    def test_getByOfficeTypeState(self):
+        results = self.vsmart.Candidates.getByOfficeTypeState('C', stateId='TX', electionYear='2012')
+        self.assertEqual(len(results), 313)
+
+    def test_getByLastname(self):
+        results = self.vsmart.Candidates.getByLastname("Agris", electionYear="2012")
+        self.assertEqual(len(results), 1)
+
+    def test_getByLevenstein(self):
+        results = self.vsmart.Candidates.getByLevenstein("Agris", electionYear="2012")
+        self.assertEqual(len(results), 1)
+
+    def test_getByElection(self):
+        results = self.vsmart.Candidates.getByElection(3517)
+        self.assertEqual(len(results), 223)
+
+    def test_getByDistrict(self):
+        results = self.vsmart.Candidates.getByDistrict(29538, electionYear=2012)
+        self.assertEqual(len(results), 10)
+
+    def test_getByZip(self):
+        results = self.vsmart.Candidates.getByZip(92821, electionYear=2012)
+        self.assertEqual(len(results), 60)
+
+
+class DistrictTestCase(LiveTestAPITestCase):
+
+    def test_getByZip(self):
+        results = self.vsmart.District.getByZip(90001)
+        self.assertEqual(len(results), 11)
+
+    def test_getByOfficeState(self):
+        results = self.vsmart.District.getByOfficeState(5, 'CA')
+        self.assertEqual(len(results), 53)
+
 
 class StateTestCase(LiveTestAPITestCase):
 

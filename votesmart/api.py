@@ -18,7 +18,12 @@ class VoteSmartAPI:
         request_str = "http://api.votesmart.org/{function}".format(function=function)
         payload = self._set_payload(params)
         response = requests.get(request_str, params=payload)
-        return parse_api_response(response.json())
+        try:
+            parsed_data = parse_api_response(response.json())
+            return parsed_data
+        except ValueError:
+            raise VotesmartApiError('Problem with API Response')
+
 
     def _set_payload(self, params):
         params = params.copy()
@@ -40,6 +45,10 @@ class VoteSmartAPI:
     @property
     def Committee(self):
         return methods.Committee(self)
+
+    @property
+    def District(self):
+        return methods.District(self)
 
     @property
     def Election(self):
