@@ -1,6 +1,10 @@
 py-votesmart changelog
 ==========================
 
+0.4.0
+-----
+    * Major refactor of API and add test coverage from Nathan Danielsen (@ndanielsen)
+
 0.3.5
 -----
     * Fork and restructure package from Nathan Danielsen (@ndanielsen)

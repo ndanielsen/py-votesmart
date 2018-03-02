@@ -2,6 +2,7 @@
 pytest>=3.2.3
 pytest_cov>=2.5.1
 coverage>=4.1
+pytest-mock==1.6.3
 
 # Python 2 Testing Requirements
 mock>=2.0.0
