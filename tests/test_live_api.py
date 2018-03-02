@@ -53,10 +53,45 @@ class ElectionTestCase(LiveTestAPITestCase):
         results = self.vsmart.Election.getElectionByZip('92821', year=2010)
         self.assertEqual(len(results), 24)
 
-    # def test_getStageCandidates(self):
-    #     results = self.vsmart.Election.getStageCandidates('839', '3296')
-    #     self.assertEqual(len(results), 5)
-    #
-    # def test_getElection(self):
-    #     results = self.vsmart.Election.getElection(839)
-    #     self.assertEqual(len(results), 5)
+    def test_getStageCandidates(self):
+        results = self.vsmart.Election.getStageCandidates('3217', 'G')
+        self.assertEqual(len(results), 106)
+
+    def test_getElection(self):
+        results = self.vsmart.Election.getElection(3217)
+        self.assertEqual(len(results), 7)
+
+
+class OfficeTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(OfficeTestCase, self).setUp()
+
+    def test_getTypes(self):
+        results = self.vsmart.Office.getTypes()
+        self.assertEqual(len(results), 10)
+
+    def test_getBranches(self):
+        results = self.vsmart.Office.getBranches()
+        self.assertEqual(len(results), 3)
+
+    def test_getLevels(self):
+        results = self.vsmart.Office.getLevels()
+        self.assertEqual(len(results), 3)
+
+    def test_getOfficesByLevel(self):
+        results = self.vsmart.Office.getOfficesByLevel('F')
+        self.assertEqual(len(results), 30)
+
+    def test_getOfficesByType(self):
+        results = self.vsmart.Office.getOfficesByType("L")
+        self.assertEqual(len(results), 3)
+
+    def test_getOfficesByTypeLevel(self):
+        results = self.vsmart.Office.getOfficesByTypeLevel("C", "F")
+        self.assertEqual(len(results), 2)
+
+    def test_getOfficesByBranchLevel(self):
+        "Legislative federal"
+        results = self.vsmart.Office.getOfficesByBranchLevel("L", "F")
+        self.assertEqual(len(results), 2)

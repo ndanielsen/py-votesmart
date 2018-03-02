@@ -1,3 +1,10 @@
+"""
+State methods that correspond to this API documentation page
+
+http://api.votesmart.org/docs/State.html
+"""
+
+
 from .base import APIMethodBase
 from .containers import VotesmartApiObject
 

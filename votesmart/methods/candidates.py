@@ -1,3 +1,10 @@
+"""
+Candidates methods that correspond to this API documentation page
+
+http://api.votesmart.org/docs/Candidates.html
+"""
+
+
 from .base import APIMethodBase
 from .containers import Candidate
 

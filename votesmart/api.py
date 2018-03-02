@@ -36,3 +36,7 @@ class VoteSmartAPI:
     @property
     def Election(self):
         return methods.Election(self)
+
+    @property
+    def Office(self):
+        return methods.Office(self)
