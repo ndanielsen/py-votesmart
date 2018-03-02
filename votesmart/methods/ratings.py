@@ -1,3 +1,14 @@
+"""
+Rating methods that correspond to this API documentation page
+
+http://api.votesmart.org/docs/Rating.html
+"""
+
+from .base import APIMethodBase
+
+class Rating(APIMethodBase):
+    def __init__(self, api_instance):
+        raise NotImplementedError()
 #     class Rating(object):
 #         @staticmethod
 #         def getCategories(stateId=None):

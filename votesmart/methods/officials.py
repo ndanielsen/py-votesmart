@@ -1,3 +1,14 @@
+"""
+Officials methods that correspond to this API documentation page
+
+http://api.votesmart.org/docs/Officials.html
+"""
+
+from .base import APIMethodBase
+
+class Officials(APIMethodBase):
+    def __init__(self, api_instance):
+        raise NotImplementedError()
 
 #     class Officials(object):
 #         @staticmethod

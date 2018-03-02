@@ -26,17 +26,57 @@ class VoteSmartAPI:
         return params
 
     @property
+    def Address(self):
+        return methods.Address(self)
+
+    @property
+    def CandidateBio(self):
+        return methods.CandidateBio(self)
+
+    @property
     def Candidates(self):
         return methods.Candidates(self)
 
     @property
-    def State(self):
-        return methods.State(self)
+    def Committee(self):
+        return methods.Committee(self)
 
     @property
     def Election(self):
         return methods.Election(self)
 
     @property
+    def Leadership(self):
+        return methods.Leadership(self)
+
+    @property
+    def Local(self):
+        return methods.Local(self)
+
+    @property
+    def Measure(self):
+        return methods.Measure(self)
+
+    @property
+    def Npat(self):
+        return methods.Npat(self)
+
+    @property
     def Office(self):
         return methods.Office(self)
+
+    @property
+    def Officials(self):
+        return methods.Officials(self)
+
+    @property
+    def State(self):
+        return methods.State(self)
+
+    @property
+    def Rating(self):
+        return methods.Rating(self)
+
+    @property
+    def Votes(self):
+        return methods.Votes(self)
