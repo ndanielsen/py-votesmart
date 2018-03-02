@@ -3,3 +3,4 @@ simplejson >= 1.8
 # Build Requirements (uncomment for deployment)
 #wheel>=0.29.0
 #twine==1.9.1
+#setuptools>=38.5.1
