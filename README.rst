@@ -1,7 +1,7 @@
 .. image:: https://travis-ci.org/ndanielsen/py-votesmart.svg?branch=develop
     :target: https://travis-ci.org/ndanielsen/py-votesmart
 .. image:: https://coveralls.io/repos/github/ndanielsen/py-votesmart/badge.svg?branch=develop
-:target: https://coveralls.io/github/ndanielsen/py-votesmart?branch=develop
+    :target: https://coveralls.io/github/ndanielsen/py-votesmart?branch=develop
 
 ================
 py-votesmart
