@@ -68,3 +68,9 @@ class VotesmartApiObject(dict):
 class Candidate(VotesmartApiObject):
     def __str__(self):
         return ' '.join((self.firstName, self.lastName))
+
+    def get(self, k, default=False):
+        if self.has_key(k):
+            return self.__getitem__(k)
+        else:
+            return default
