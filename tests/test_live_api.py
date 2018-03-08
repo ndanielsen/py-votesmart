@@ -142,6 +142,10 @@ class CandidateBioTestCase(LiveTestAPITestCase):
         results = self.vsmart.CandidateBio.getBio(176111)
         self.assertEqual(len(results), 23)
 
+    def test_getDetailedBio(self):
+        results = self.vsmart.CandidateBio.getDetailedBio(176111)
+        self.assertEqual(len(results), 23)
+
     def test_getAddlBio_winning_candidate(self):
         results = self.vsmart.CandidateBio.getAddlBio(138524)
         self.assertEqual(len(results), 4)

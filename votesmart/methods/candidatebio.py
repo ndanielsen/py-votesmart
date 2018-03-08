@@ -25,6 +25,11 @@ class CandidateBio(APIMethodBase):
         result = self.api.api_call('CandidateBio.getBio', params)
         return Bio(result['bio'])
 
+    def getDetailedBio(self, candidateId):
+        params = {'candidateId': candidateId}
+        result = self.api.api_call('CandidateBio.getDetailedBio', params)
+        return Bio(result['bio'])
+
     def getAddlBio(self, candidateId):
         params = {'candidateId': candidateId}
         result = self.api.api_call('CandidateBio.getAddlBio', params)
