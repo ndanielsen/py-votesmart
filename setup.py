@@ -32,7 +32,7 @@ def get_requires(path=REQUIRE_PATH):
             yield line
 
 setup(name="py-votesmart",
-      version="0.4.0",
+      version="0.4.1",
       description="Libraries for interacting with the Project Vote Smart API",
       author="Nathan Danielsen <nathan.danielsen@gmail.com>",
       author_email = "nathan.danielsen@gmail.com",
@@ -53,6 +53,7 @@ setup(name="py-votesmart",
                    "Programming Language :: Python :: 2.7",
                    "Programming Language :: Python :: 3.4",
                    "Programming Language :: Python :: 3.5"
+                   "Programming Language :: Python :: 3.6"                   
                    ],
       install_requires=list(get_requires()),
       )
