@@ -1,6 +1,10 @@
 py-votesmart changelog
 ==========================
 
+0.4.1
+-----
+    * Add requests.py to requirements.txt
+
 0.4.0
 -----
     * Major refactor of API and add test coverage from Nathan Danielsen (@ndanielsen)
