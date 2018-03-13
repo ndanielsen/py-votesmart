@@ -31,6 +31,12 @@ class VotesmartApiObject(dict):
     def has_key(self, k):
         return k in self.__dict__
 
+    def get(self, k, default=False):
+        if self.has_key(k):
+            return self.__getitem__(k)
+        else:
+            return default
+
     def update(self, *args, **kwargs):
         return self.__dict__.update(*args, **kwargs)
 
@@ -62,3 +68,9 @@ class VotesmartApiObject(dict):
 class Candidate(VotesmartApiObject):
     def __str__(self):
         return ' '.join((self.firstName, self.lastName))
+
+    def get(self, k, default=False):
+        if self.has_key(k):
+            return self.__getitem__(k)
+        else:
+            return default

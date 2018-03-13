@@ -2,7 +2,7 @@ import os
 import unittest
 
 from votesmart import VoteSmartAPI
-
+from votesmart.exceptions import VotesmartApiError
 
 @unittest.skipIf(not os.environ.get('VOTE_SMART_API_KEY'), 'no api key')
 class LiveTestAPITestCase(unittest.TestCase):
@@ -130,3 +130,26 @@ class OfficeTestCase(LiveTestAPITestCase):
         "Legislative federal"
         results = self.vsmart.Office.getOfficesByBranchLevel("L", "F")
         self.assertEqual(len(results), 2)
+
+
+
+class CandidateBioTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(CandidateBioTestCase, self).setUp()
+
+    def test_getBio(self):
+        results = self.vsmart.CandidateBio.getBio(176111)
+        self.assertEqual(len(results), 23)
+
+    def test_getDetailedBio(self):
+        results = self.vsmart.CandidateBio.getDetailedBio(176111)
+        self.assertEqual(len(results), 23)
+
+    def test_getAddlBio_winning_candidate(self):
+        results = self.vsmart.CandidateBio.getAddlBio(138524)
+        self.assertEqual(len(results), 4)
+
+    def test_getAddlBio_no_bio(self):
+        with self.assertRaises(VotesmartApiError):
+            results = self.vsmart.CandidateBio.getAddlBio(176111)
