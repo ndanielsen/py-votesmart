@@ -4,6 +4,8 @@ py-votesmart changelog
 0.4.0
 -----
     * Major refactor of API and add test coverage from Nathan Danielsen (@ndanielsen)
+    * Fix bugs and add support for several previously unsupported API methods
+    * Not all API methods are implemented in new API setup
 
 0.3.5
 -----
