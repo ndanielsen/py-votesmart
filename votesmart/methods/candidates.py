@@ -11,19 +11,14 @@ from .containers import Candidate
 
 class Candidates(APIMethodBase):
 
-    def getByOfficeState(self, officeId, stateId=None, electionYear=None):
-        params = {'officeId': officeId, 'stateId':stateId, 'electionYear': electionYear}
+    def getByOfficeState(self, officeId, stateId=None, electionYear=None, stageId=None):
+        params = {'officeId': officeId, 'stateId':stateId, 'electionYear': electionYear, "stageId": stageId}
         result = self.api.api_call('Candidates.getByOfficeState', params)
         return self.result_to_obj(Candidate, result['candidateList']['candidate'])
 
     def getByOfficeTypeState(self, officeTypeId, stateId=None, electionYear=None):
         params = {'officeTypeId': officeTypeId, 'stateId':stateId, 'electionYear': electionYear}
         result = self.api.api_call('Candidates.getByOfficeTypeState', params)
-        return self.result_to_obj(Candidate, result['candidateList']['candidate'])
-
-    def getByOfficeState(self, officeId, stateId=None, electionYear=None):
-        params = {'officeId': officeId, 'stateId':stateId, 'electionYear': electionYear}
-        result = self.api.api_call('Candidates.getByOfficeState', params)
         return self.result_to_obj(Candidate, result['candidateList']['candidate'])
 
     def getByLastname(self, lastName, electionYear=None):

@@ -20,6 +20,10 @@ class CandidatesTestCase(LiveTestAPITestCase):
         results = self.vsmart.Candidates.getByOfficeState(3, 'NJ', electionYear=2009)
         self.assertEqual(len(results), 20)
 
+    def test_getByOfficeState_stageId(self):
+        results = self.vsmart.Candidates.getByOfficeState(3, 'NJ', electionYear=2009, stageId='P')
+        self.assertEqual(len(results), 8)
+
     def test_getByOfficeTypeState(self):
         results = self.vsmart.Candidates.getByOfficeTypeState('C', stateId='TX', electionYear='2012')
         self.assertEqual(len(results), 313)
