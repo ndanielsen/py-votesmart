@@ -32,7 +32,7 @@ def get_requires(path=REQUIRE_PATH):
             yield line
 
 setup(name="py-votesmart",
-      version="0.4.1",
+      version="0.4.2",
       description="Libraries for interacting with the Project Vote Smart API",
       author="Nathan Danielsen <nathan.danielsen@gmail.com>",
       author_email = "nathan.danielsen@gmail.com",
