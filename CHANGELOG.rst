@@ -1,6 +1,10 @@
 py-votesmart changelog
 ==========================
 
+0.4.2
+-----
+    * Add additional parameter to Candidates.getByOfficeState
+
 0.4.1
 -----
     * Add requests.py to requirements.txt
