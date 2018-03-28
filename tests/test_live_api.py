@@ -40,6 +40,10 @@ class CandidatesTestCase(LiveTestAPITestCase):
         results = self.vsmart.Candidates.getByElection(3517)
         self.assertEqual(len(results), 223)
 
+    def test_getByElection(self):
+        results = self.vsmart.Candidates.getByElection(3517, 'G')
+        self.assertEqual(len(results), 53)
+
     def test_getByDistrict(self):
         results = self.vsmart.Candidates.getByDistrict(29538, electionYear=2012)
         self.assertEqual(len(results), 10)
