@@ -139,8 +139,6 @@ class OfficeTestCase(LiveTestAPITestCase):
         results = self.vsmart.Office.getOfficesByBranchLevel("L", "F")
         self.assertEqual(len(results), 2)
 
-
-
 class CandidateBioTestCase(LiveTestAPITestCase):
 
     def setUp(self):
@@ -161,3 +159,32 @@ class CandidateBioTestCase(LiveTestAPITestCase):
     def test_getAddlBio_no_bio(self):
         with self.assertRaises(VotesmartApiError):
             results = self.vsmart.CandidateBio.getAddlBio(176111)
+
+class RatingTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(RatingTestCase, self).setUp()
+
+    def test_getCategories(self):
+        results = self.vsmart.Rating.getCategories(stateId="CA")
+        self.assertEqual(len(results), 25)
+
+    def test_getSigList(self):
+        results = self.vsmart.Rating.getSigList("2", stateId="CA")
+        self.assertEqual(len(results), 6)
+
+    def test_getSig(self):
+        results = self.vsmart.Rating.getSig("331")
+        self.assertEqual(len(results), 16)
+
+    def test_getSigRatings(self):
+        results = self.vsmart.Rating.getSigRatings("331")
+        self.assertEqual(len(results), 3)
+
+    def test_getCandidateRating(self):
+        results = self.vsmart.Rating.getCandidateRating(138524)
+        self.assertEqual(len(results), 148)
+
+    def test_getRating(self):
+        results = self.vsmart.Rating.getRating(5613)
+        self.assertEqual(len(results), 117)
