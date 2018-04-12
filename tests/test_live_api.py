@@ -94,7 +94,7 @@ class ElectionTestCase(LiveTestAPITestCase):
 
     def test_getElectionByZip(self):
         results = self.vsmart.Election.getElectionByZip('92821', year=2010)
-        self.assertEqual(len(results), 24)
+        self.assertEqual(len(results), 27)
 
     def test_getStageCandidates(self):
         results = self.vsmart.Election.getStageCandidates('3217', 'G')
