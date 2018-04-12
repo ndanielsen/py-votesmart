@@ -1,6 +1,11 @@
 py-votesmart changelog
 ==========================
 
+0.4.3
+-----
+    * Add Ratings method
+    * Add optional param on Candidates.getByOfficeState
+
 0.4.2
 -----
     * Add additional parameter to Candidates.getByOfficeState

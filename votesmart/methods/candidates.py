@@ -31,8 +31,8 @@ class Candidates(APIMethodBase):
         result = self.api.api_call('Candidates.getByLevenstein', params)
         return self.result_to_obj(Candidate, result['candidateList']['candidate'])
 
-    def getByElection(self, electionId):
-        params = {'electionId': electionId}
+    def getByElection(self, electionId, stageId=None):
+        params = {'electionId': electionId, 'stageId': stageId}
         result = self.api.api_call('Candidates.getByElection', params)
         return self.result_to_obj(Candidate, result['candidateList']['candidate'])
 
