@@ -5,20 +5,25 @@ http://api.votesmart.org/docs/Measure.html
 """
 
 from .base import APIMethodBase
+from .containers import VotesmartApiObject
+
+class MeasureList(VotesmartApiObject):
+    def __str__(self):
+        return self.title
+
+class MeasureDetail(VotesmartApiObject):
+    def __str__(self):
+        return self.title
+
 
 class Measure(APIMethodBase):
-    def __init__(self, api_instance):
-        raise NotImplementedError()
-#     class Measure(object):
-#         @staticmethod
-#         def getMeasuresByYearState(year, stateId):
-#             params = {'year':year, 'stateId':stateId}
-#             result = votesmart._apicall('Measure.getMeasuresByYearState', params)
-#             return _result_to_obj(Measure, result['measures']['measure'])
-#
-#         @staticmethod
-#         def getMeasure(measureId):
-#             params = {'measureId':measureId}
-#             result = votesmart._apicall('Measure.getMeasure', params)
-#             return MeasureDetail(result['measure'])
-#
+
+    def getMeasuresByYearState(self, year, stateId):
+        params = {'year':year, 'stateId':stateId}
+        result = self.api.api_call('Measure.getMeasuresByYearState', params)
+        return self.result_to_obj(MeasureList, result['measures']['measure'])
+
+    def getMeasure(self, measureId):
+        params = {'measureId':measureId}
+        result = self.api.api_call('Measure.getMeasure', params)
+        return MeasureDetail(result['measure'])

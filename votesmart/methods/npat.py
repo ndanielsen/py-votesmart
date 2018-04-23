@@ -11,11 +11,8 @@ http://api.votesmart.org/docs/Npat.html
 from .base import APIMethodBase
 
 class Npat(APIMethodBase):
-    def __init__(self, api_instance):
-        raise NotImplementedError()
-#     class Npat(object):
-#         @staticmethod
-#         def getNpat(candidateId):
-#             params = {'candidateId':candidateId}
-#             result = votesmart._apicall('Npat.getNpat', params)
-#             return result['npat']
+
+    def getNpat(self, candidateId):
+        params = {'candidateId':candidateId}
+        result = self.api.api_call('Npat.getNpat', params)
+        return result['npat']

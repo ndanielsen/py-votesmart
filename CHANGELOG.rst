@@ -1,6 +1,15 @@
 py-votesmart changelog
 ==========================
 
+0.4.4
+-----
+    * Add Local, Leadership, Npat, Measure and Office API methods
+
+0.4.3
+-----
+    * Add Ratings method
+    * Add optional param on Candidates.getByOfficeState
+
 0.4.3
 -----
     * Add Ratings method
