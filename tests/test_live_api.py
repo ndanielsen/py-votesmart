@@ -188,3 +188,64 @@ class RatingTestCase(LiveTestAPITestCase):
     def test_getRating(self):
         results = self.vsmart.Rating.getRating(5613)
         self.assertEqual(len(results), 117)
+
+
+
+class OfficialsTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(OfficialsTestCase, self).setUp()
+
+    def test_getTypes(self):
+        results = self.vsmart.Officials.getTypes()
+        print(results)
+        self.assertEqual(len(results), 10)
+
+    def test_getStatewide(self):
+        results = self.vsmart.Officials.getStatewide(stateId='CA')
+        self.assertEqual(len(results), 1858)
+
+    def test_getByOfficeState(self):
+        results = self.vsmart.Officials.getByOfficeState('73', stateId='AL')
+        self.assertEqual(len(results), 17)
+
+    def test_getByLastname(self):
+        results = self.vsmart.Officials.getByLastname("Battle")
+        self.assertEqual(len(results), 4)
+
+    def test_getByLevenstein(self):
+        results = self.vsmart.Officials.getByLevenstein("Battle")
+        self.assertEqual(len(results), 42)
+
+    def test_getByDistrict(self):
+        results = self.vsmart.Officials.getByDistrict(31088)
+        self.assertEqual(len(results), 17)
+
+    def test_getByZip(self):
+        results = self.vsmart.Officials.getByZip(90210)
+        self.assertEqual(len(results), 27)
+
+
+class NpatTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(NpatTestCase, self).setUp()
+
+    def test_getByZip(self):
+        results = self.vsmart.Npat.getNpat(176111)
+        self.assertEqual(len(results), 10)
+
+
+class MeasureTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(MeasureTestCase, self).setUp()
+
+    def test_getMeasuresByYearState(self):
+        results = self.vsmart.Measure.getMeasuresByYearState(2016, 'CA')
+        print(results)
+        self.assertEqual(len(results), 18)
+
+    def test_getMeasure(self):
+        results = self.vsmart.Measure.getMeasure(2142)
+        self.assertEqual(len(results), 17)
