@@ -249,3 +249,34 @@ class MeasureTestCase(LiveTestAPITestCase):
     def test_getMeasure(self):
         results = self.vsmart.Measure.getMeasure(2142)
         self.assertEqual(len(results), 17)
+
+
+class LeadershipTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(LeadershipTestCase, self).setUp()
+
+    def test_getPositions(self):
+        results = self.vsmart.Leadership.getPositions()
+        self.assertEqual(len(results), 39)
+
+    def test_getOfficials(self):
+        results = self.vsmart.Leadership.getOfficials(leadershipId=311)
+        self.assertEqual(len(results), 8)
+
+class LocalTestCase(LiveTestAPITestCase):
+
+    def setUp(self):
+        super(LocalTestCase, self).setUp()
+
+    def test_getCounties(self):
+        results = self.vsmart.Local.getCounties('UT')
+        self.assertEqual(len(results), 29)
+
+    def test_getCities(self):
+        results = self.vsmart.Local.getCities("UT")
+        self.assertEqual(len(results), 22)
+
+    def test_getOfficials(self):
+        results = self.vsmart.Local.getOfficials(4018)
+        self.assertEqual(len(results), 3)
